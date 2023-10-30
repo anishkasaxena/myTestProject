@@ -25,6 +25,8 @@ jobs:
         package: ${{ env.RESULT }}
     steps:
       - name: Delete Package
+        run: | 
+          echo "${{ env.RESULT }}"
        
 
 
