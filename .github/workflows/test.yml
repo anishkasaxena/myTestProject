@@ -12,6 +12,6 @@ jobs:
         - name: Fetch package
           id: step1
           run: |
-            result=$(curl -v -s -H "Authorization: token ${{ secrets.TOKEN }}" \
-            "https://api.github.com/orgs/5ire-tech/packages?package_type=container"
+            result=$(curl -v -s -H "Authorization: token ${{ secrets.BOT_TOKEN }}" \
+            "https://api.github.com/orgs/5ire-tech/packages?package_type=container")
             echo "$result" 
