@@ -15,11 +15,12 @@ jobs:
           - name: Debug
             run: |
               set -x
-              result=$(curl -v -s -H "Authorization: token ${{ secrets.TOKEN }}" \
-              "https://api.github.com/orgs/5ire-tech/packages?package_type=container"\
-              | jq -r'.[].name | join(", ")' > package_names.txt)
-              package_names=$(<package_names.txt)
-              echo "PACKAGE_NAMES=$package_names" >> $GITHUB_ENV
+              result=$(curl -v -s -H "Authorization: token ${{ secrets.BOT_TOKEN }}" \
+              "https://api.github.com/orgs/5ire-tech/packages?package_type=container" \
+              | jq -r '[.[] | select(.name) | .name] | join(", ")')
+
+               echo "$result" >>"$GITHUB_OUTPUT"
+
 
 
 
