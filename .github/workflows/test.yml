@@ -16,17 +16,18 @@ jobs:
               result=$(curl -s -H "Authorization: token ${{ secrets.TOKEN }}" \
               "https://api.github.com/orgs/5ire-tech/packages?package_type=container" \
                | jq -r '.[] .name' | tr '\n' ',' | sed 's/,$//' | sed 's/^/[/;s/$/]/') 
-               echo "RESULT=$result" >> $GITHUB_ENV
+               echo "$result<<EOF" >> $GITHUB_OUTPUT
+               echo 'EOF' >> $GITHUB_OUTPUT
   use-matrix:
     needs: fetch-packages
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        package: ${{ env.RESULT }}
+        package: ${{needs.fetch-packages.outputs.output}}
     steps:
       - name: Delete Package
         run: | 
-          echo "${{ env.RESULT }}"
+          echo "${{ matrix.package }}"
        
 
 
