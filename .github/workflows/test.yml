@@ -6,6 +6,7 @@ on:
 jobs:
   fetch-packages:
     runs-on: ubuntu-latest
+
     outputs:
       output: ${{steps.step1.outputs.result}}
     steps:        
@@ -14,4 +15,4 @@ jobs:
           run: |
             result=$(curl -s -H "Authorization: token ${{ secrets.TOKEN }}" \
             "https://api.github.com/orgs/5ire-tech/packages?package_type=container"| jq -r '[.[] | select(.name) | .name] | join(", ")')
-            echo "$result" 
+            echo "$result" >>"$GITHUB_OUTPUT"
