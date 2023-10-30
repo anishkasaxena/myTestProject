@@ -19,7 +19,7 @@ jobs:
               "https://api.github.com/orgs/5ire-tech/packages?package_type=container" \
               | jq -r '[.[] | select(.name) | .name] | join(", ")')
 
-               echo "$result" >>"$GITHUB_OUTPUT"
+               echo "$result" >> "$GITHUB_OUTPUT"
 
 
 
