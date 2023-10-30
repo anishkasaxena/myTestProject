@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        package: $${{ env.RESULT }}
+        package: ${{ env.RESULT }}
     steps:
       - name: Delete Package
        
