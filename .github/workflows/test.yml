@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        package: ${{fromJson(needs.fetch-packages.outputs.output)}}
+        package: ${{needs.fetch-packages.outputs.output}}
     steps:
       - name: Delete Package
         uses: actions/delete-package-versions@v4
