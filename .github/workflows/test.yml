@@ -15,9 +15,8 @@ jobs:
               set -x
               result=$(curl -v -s -H "Authorization: token ${{ secrets.TOKEN }}" \
               "https://api.github.com/orgs/hetch-tech/packages?package_type=container" \
-              | jq -r '[.[] | select(.name) | .name] | join(", ")') > package_names.txt
-              package-names=$(<package_names.txt)
-               echo "PACKAGE_NAMES=$package_names" >> $GITHUB_OUTPUT
+              | jq -r '[.[] | select(.name) | .name] | join(", ")') 
+               echo "$result" 
 
 
 
