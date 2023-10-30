@@ -18,6 +18,12 @@ jobs:
                | jq -r '.[] .name' | tr '\n' ',' | sed 's/,$//' | sed 's/^/[/;s/$/]/') 
                echo "$result<<EOF" >> $GITHUB_OUTPUT
                echo 'EOF' >> $GITHUB_OUTPUT
+  use-matrix:
+    needs: fetch-packages
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package: ${{fromJson(needs.fetch-packages.outputs.output)}}
 
 
 
