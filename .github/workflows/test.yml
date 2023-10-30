@@ -27,7 +27,7 @@ jobs:
     
     strategy:
       matrix:
-        package: ${{ needs.fetch-packages.outputs.result }}
+        package: ${{ split(needs.fetch-packages.outputs.result, ', ') }}
     steps:
     
       - name: Delete Package
