@@ -24,13 +24,10 @@ jobs:
   use-matrix:
     needs: fetch-packages
     runs-on: ubuntu-latest
-    env: 
-        result: ${{ needs.fetch-packages.outputs.result }}
-        
     
     strategy:
       matrix:
-        package: ${{ env.result }}
+        package: ${{ needs.fetch-packages.outputs.result }}
     steps:
     
       - name: Delete Package
