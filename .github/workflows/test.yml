@@ -1,0 +1,19 @@
+name: Packages cleanup
+on:
+    push:
+      branches:
+        - main
+jobs:
+  fetch-packages:
+    runs-on: ubuntu-latest
+    outputs:
+      output: ${{steps.step1.outputs.result}}
+    steps:        
+        - name: Fetch package
+          id: step1
+          run: |
+            result=$(curl -v -s -H "Authorization: token ${{ secrets.TOKEN }}" \
+            "https://api.github.com/orgs/5ire-tech/packages?package_type=container" \
+            | jq -r '[.[] | select(.name) | .name] | join(", ")')
+
+            echo "$result" 
