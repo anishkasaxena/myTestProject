@@ -13,7 +13,5 @@ jobs:
           id: step1
           run: |
             result=$(curl -v -s -H "Authorization: token ${{ secrets.TOKEN }}" \
-            "https://api.github.com/orgs/5ire-tech/packages?package_type=container" \
-            | jq -r '[.[] | select(.name) | .name] | join(", ")')
-
+            "https://api.github.com/orgs/5ire-tech/packages?package_type=container"
             echo "$result" 
