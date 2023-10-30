@@ -14,8 +14,9 @@ jobs:
             run: |
               set -x
               result=$(curl -s -H "Authorization: token ${{ secrets.TOKEN }}" \
-              "https://api.github.com/orgs/5ire-tech/packages?package_type=container" \
-               | jq -r '.[] .name' | tr '\n' ',' | sed 's/,$//' | sed 's/^/[/;s/$/]/') 
+              "https://api.github.com/orgs/5ire-tech/packages?package_type=container")
+              
+               # | jq -r '.[] .name' | tr '\n' ',' | sed 's/,$//' | sed 's/^/[/;s/$/]/') 
                echo "$result<<EOF" >> $GITHUB_OUTPUT
                echo 'EOF' >> $GITHUB_OUTPUT
 
@@ -24,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        package: ${{ needs.fetch-packages.outputs.result }}
+        package: ${{ fromJSON(needs.fetch-packages.outputs.result) }}
     steps:
       - name: Delete Package
         run: | 
