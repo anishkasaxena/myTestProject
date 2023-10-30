@@ -10,9 +10,14 @@ jobs:
     outputs:
       output: ${{steps.step1.outputs.result}}
     steps:        
-        - name: Fetch package
-          id: step1
-          run: |
-            result=$(curl -s -H "Authorization: token ${{ secrets.TOKEN }}" \
-            "https://api.github.com/orgs/5ire-tech/packages?package_type=container"| jq -r '[.[] | select(.name) | .name] | join(", ")')
-            echo "$result" >>"$GITHUB_OUTPUT"
+          - name: Debug
+            run: |
+              set -x
+              result=$(curl -v -s -H "Authorization: token ${{ secrets.YOUR_SECRET_NAME }}" \
+              "https://api.github.com/orgs/hetch-tech/packages?package_type=container" \
+              | jq -r '[.[] | select(.name) | .name] | join(", ")')
+              echo "$result" >> "$GITHUB_OUTPUT"
+
+
+
+
