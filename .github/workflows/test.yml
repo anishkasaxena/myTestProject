@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      output: ${{steps.step1.outputs.result}}
+      output: ${{ steps.fetch-packages.outputs.result }}
     steps:        
           - name: Debug
             run: |
@@ -18,12 +18,14 @@ jobs:
                | jq -r '.[] .name' | tr '\n' ',' | sed 's/,$//' | sed 's/^/[/;s/$/]/') 
                echo "$result<<EOF" >> $GITHUB_OUTPUT
                echo 'EOF' >> $GITHUB_OUTPUT
+               echo "::set-output name=result::$result"  # Set the result as an output
+
   use-matrix:
     needs: fetch-packages
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        package: ${{needs.fetch-packages.outputs.output}}
+        package: ${{ needs.fetch-packages.outputs.result }}
     steps:
       - name: Delete Package
         run: | 
