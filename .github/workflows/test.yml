@@ -30,7 +30,7 @@ jobs:
     
     strategy:
       matrix:
-        package: ${{result}} 
+        package: ${{ env.result }}
     steps:
     
       - name: Delete Package
