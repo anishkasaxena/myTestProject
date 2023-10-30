@@ -13,7 +13,7 @@ jobs:
           - name: Debug
             run: |
               set -x
-              result=$(curl -v -s -H "Authorization: token ${{ secrets.YOUR_SECRET_NAME }}" \
+              result=$(curl -v -s -H "Authorization: token ${{ secrets.TOKEN }}" \
               "https://api.github.com/orgs/hetch-tech/packages?package_type=container" \
               | jq -r '[.[] | select(.name) | .name] | join(", ")')
               echo "$result" >> "$GITHUB_OUTPUT"
