@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      output: ${{ steps.step1.outputs.result }}
+      result: ${{ steps.step1.outputs.result }}
     steps:        
           - name: Debug
             run: |
@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        package: ${{ needs.fetch-packages.outputs.output.result }}
+        package: ${{ needs.fetch-packages.outputs.result }}
     steps:
       - name: Delete Package
         run: | 
