@@ -16,7 +16,7 @@ jobs:
             set -x
             result=$(curl -s -H "Authorization: token ${{ secrets.TOKEN }}" \
             https://api.github.com/orgs/5ire-tech/packages?package_type=container\
-             | jq -r [.[] | select(.name) | .name] | join(", "))
+             | jq -r '[.[] | select(.name) | .name] | join(", ")')
              echo "$result<<EOF" >> $GITHUB_OUTPUT
              echo 'EOF' >> $GITHUB_OUTPUT   
                              
