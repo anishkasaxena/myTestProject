@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      result: ${{ steps.step1.outputs.result }}
+      result: ${{ steps.step1.outputs.result2 }}
     steps:        
         - name: Debug
           id: step1
@@ -17,8 +17,8 @@ jobs:
             result=$(curl -s -H "Authorization: token ${{ secrets.TOKEN }}" \
             https://api.github.com/orgs/5ire-tech/packages?package_type=container\
             | jq -r '.[] .name' | tr '\n' ',' | sed 's/,$//' | sed 's/^/[/;s/$/]/') 
-            result="$(echo "$result" | sed "s/'//g")"
-            echo "$result<<EOF" >> $GITHUB_OUTPUT
+            result2="$(echo "$result" | tr -d "'")"
+            echo "$result2<<EOF" >> $GITHUB_OUTPUT
             echo 'EOF' >> $GITHUB_OUTPUT   
                              
 
@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-          package: ${{ needs.fetch-packages.outputs.output.result }}
+          package: ${{ needs.fetch-packages.outputs.output.result2 }}
     steps:
       - name: Delete Package
         run: | 
