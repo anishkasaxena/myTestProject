@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        package: ${{ split(needs.fetch-packages.outputs.result, ', ') }}
+        package: [esg-backend]
     steps:
     
       - name: Delete Package
