@@ -30,7 +30,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-          package: ${{ needs.fetch-packages.outputs.output.result }}
+          package: ["${{ needs.fetch-packages.outputs.output.result }}"]
+          
     steps:
       - name: Delete Package
         run: | 
