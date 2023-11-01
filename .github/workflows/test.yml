@@ -27,7 +27,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-          package: ["${{ needs.fetch-packages.outputs.result }}"]
+          # package: ["${{ needs.fetch-packages.outputs.result }}"]
+            package: ["$({{ cat $GITHUB_OUTPUT }})"]
+
          
           
     steps:
