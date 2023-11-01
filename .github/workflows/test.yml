@@ -36,13 +36,11 @@ jobs:
         with:
           name: my-result-artifact
           path: $GITHUB_WORKSPACE
-            
-
-         
-     - name: Read and Debug Package Value
+               
+      - name: Read and Debug Package Value
         run: |
-          result=$(cat $GITHUB_WORKSPACE/my_result.txt)
-          echo "Value in matrix.package: $result"
+         result=$(cat $GITHUB_WORKSPACE/my_result.txt)
+         echo "Value in matrix.package: $result"
 
 
 
