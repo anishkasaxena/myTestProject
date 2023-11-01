@@ -16,7 +16,7 @@ jobs:
             set -x
             result=$(curl -s -H "Authorization: token ${{ secrets.TOKEN }}" \
             https://api.github.com/orgs/5ire-tech/packages?package_type=container\
-            | jq -r '.[] .name' | tr '\n' ',' | sed 's/,$//' | sed 's/^/[/;s/$/]/') 
+            | jq -r '.[] .name' | tr '\n' ',' | sed 's/,$//' | sed 's/^/[/;s/$/]/' | tr -d '[]') 
             # # echo "$result<<EOF" >> $GITHUB_OUTPUT
             # echo "$result<<EOF" >> $GITHUB_WORKSPACE/my_result.txt  # Save the result to a file
 
