@@ -35,7 +35,7 @@ jobs:
     steps:
       - name: Debug
         run: |
-         echo "result: ["${{ needs.fetch-packages.outputs.result }}"] "
+         echo "result:"${{ needs.fetch-packages.outputs.result }}"
       # - name: Delete Package
       #   run: |
       #     echo "packages: ${{ fromJson(needs.fetch-packages.outputs.result) }}"
