@@ -27,8 +27,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        # package: ["${{ needs.fetch-packages.outputs.result }}"]
-         package: ${{ fromJson(needs.fetch-packages.outputs.result) }}
+           package: ["${{ fromJson(needs.fetch-packages.outputs.result) }}"]
+         # package: ${{ fromJson(needs.fetch-packages.outputs.result) }}
  
     steps:
       - name: Delete Package
