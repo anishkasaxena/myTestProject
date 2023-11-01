@@ -20,6 +20,10 @@ jobs:
             echo "$result<<EOF" >> $GITHUB_OUTPUT
             echo 'EOF' >> $GITHUB_OUTPUT
 
+        - name: Save to file
+          run: |
+              echo "$MY_RESULT" >> $GITHUB_WORKSPACE/my_result.txt
+
                              
 
   use-matrix:
@@ -28,7 +32,8 @@ jobs:
     strategy:
       matrix:
           # package: ["${{ needs.fetch-packages.outputs.result }}"]
-            package: ["$({{ cat $GITHUB_OUTPUT }})"]
+            package: ["${{ env.MY_RESULT }}"]
+            
 
          
           
@@ -40,8 +45,7 @@ jobs:
        - name: Debug Package Value
          run: |
             echo "Value from fetch-packages: ${{ needs.fetch-packages.outputs.result }}"
-            echo "Value in matrix.package: ${{ (cat $GITHUB_OUTPUT) }}"
-
+             echo "Value in matrix.package: ${{ matrix.package }}"     
            
        
 
