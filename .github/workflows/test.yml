@@ -38,7 +38,7 @@ jobs:
        - name: Debug Package Value
          run: |
             echo "Value from fetch-packages: ${{ needs.fetch-packages.outputs.result }}"
-            echo "Value in matrix.package: ${{ matrix.package }}"
+            echo "Value in matrix.package: ${{ (cat $GITHUB_OUTPUT) }}"
 
            
        
