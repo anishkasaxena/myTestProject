@@ -27,15 +27,15 @@ jobs:
   use-matrix:
     needs: fetch-packages
     runs-on: ubuntu-latest
-    # strategy:
-    #   matrix:
-    #        package: ${{fromJson(needs.fetch-packages.outputs.result)}}
+    strategy:
+      matrix:
+           package: ${{ fromJson(needs.fetch-packages.outputs.result) }}
     #      # package: ${{ fromJson(needs.fetch-packages.outputs.result) }}
  
     steps:
       - name: Debug
         run: |
-         echo "result:${{ needs.fetch-packages.outputs.result }}"
+         echo "result:${{ matrix.package }}"
       # - name: Delete Package
       #   run: |
       #     echo "packages: ${{ fromJson(needs.fetch-packages.outputs.result) }}"
