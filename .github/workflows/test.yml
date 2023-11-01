@@ -28,17 +28,17 @@ jobs:
     strategy:
       matrix:
           package: ["${{ needs.fetch-packages.outputs.output.result }}"]
-          run: |
-              echo "${{ needs.fetch-packages.outputs.output.result }}"
+         
           
     steps:
     #   - name: Delete Package
     #     uses: actions/delete-package-versions@v4
     #     with: 
     #         package-name: ${{ matrix.package }}
-      - name: Debug Package Name
-        run: | 
-            echo "Package Name: ${{ matrix.package }}"
+       - name: Debug Package Value
+         run: |
+            echo "Value from fetch-packages: ${{ needs.fetch-packages.outputs.output.result }}"
+            echo "Value in matrix.package: ${{ matrix.package }}"
 
            
        
