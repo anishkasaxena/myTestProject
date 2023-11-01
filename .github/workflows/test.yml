@@ -31,7 +31,7 @@ jobs:
     steps:
       - name: Delete Package
         run : |
-            echo "${{ matrix.package }}"
+            echo "matrix : ${{ matrix.package }}"
 
 
 
