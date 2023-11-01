@@ -17,8 +17,10 @@ jobs:
             result=$(curl -s -H "Authorization: token ${{ secrets.TOKEN }}" \
             https://api.github.com/orgs/5ire-tech/packages?package_type=container\
             | jq -r '.[] .name' | tr '\n' ',' | sed 's/,$//' | sed 's/^/[/;s/$/]/') 
-            echo "$result<<EOF" >> $GITHUB_OUTPUT
-            echo 'EOF' >> $GITHUB_OUTPUT
+            # echo "$result<<EOF" >> $GITHUB_OUTPUT
+            echo "$result<<EOF" >> $GITHUB_WORKSPACE/my_result.txt  # Save the result to a file
+
+            echo 'EOF' >> $GITHUB_WORKSPACE/my_result.txt
 
         - name: Save to file
           run: |
@@ -32,7 +34,7 @@ jobs:
     strategy:
       matrix:
           # package: ["${{ needs.fetch-packages.outputs.result }}"]
-            package: ["${{ env.MY_RESULT }}"]
+            package: ["$GITHUB_WORKSPACE/my_result.txt"]
             
 
          
@@ -44,9 +46,8 @@ jobs:
     #         package-name: ${{ matrix.package }}
        - name: Debug Package Value
          run: |
-            echo "Value from fetch-packages: ${{ needs.fetch-packages.outputs.result }}"
-             echo "Value in matrix.package: ${{ matrix.package }}"     
-           
+            result=$(cat ${{ matrix.package }})
+             echo "Value in matrix.package: $result"
        
 
 
