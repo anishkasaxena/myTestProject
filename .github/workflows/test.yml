@@ -44,15 +44,16 @@ jobs:
          
           
     steps:
-    #   - name: Delete Package
-    #     uses: actions/delete-package-versions@v4
-    #     with: 
-    #         package-name: ${{ matrix.package }}
-       - name: Debug Package Value
-         run: |
-            result=$(cat ${{ matrix.package }})
-             echo "Value in matrix.package: $result"
-       
+    #   steps:
+      - name: Wait for File
+        run: |
+            while [ ! -f $GITHUB_WORKSPACE/my_result.txt ]; do
+            sleep 1
+            done
+      - name: Read and Debug Package Value
+        run: |
+          result=$(cat $GITHUB_WORKSPACE/my_result.txt)
+          echo "Value in matrix.package: $result"
 
 
 
