@@ -30,9 +30,8 @@ jobs:
         package: ["${{ needs.fetch-packages.outputs.result }}"]
     steps:
       - name: Delete Package
-        uses: actions/delete-package-versions@v4
-        with: 
-          package-name: ${{ matrix.package }}
+        run : |
+            echo "${{ matrix.package }}"
 
 
 
