@@ -29,13 +29,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-           package: ["${{ fromJson(needs.fetch-packages.outputs.result) }}"]
+           package: ${{fromJson(needs.fetch-packages.outputs.result)}}
          # package: ${{ fromJson(needs.fetch-packages.outputs.result) }}
  
     steps:
       - name: Delete Package
         run : |
-            echo " packages: $package "
+            echo " packages: ${{ matrix.package }} "
 
 
 
