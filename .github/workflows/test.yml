@@ -29,9 +29,17 @@ jobs:
       matrix:
         package: ["${{ needs.fetch-packages.outputs.result }}"]
     steps:
+      - name: packagename
+        run : |
+           package_names="${{ needs.fetch-packages.outputs.result }}"
+           package_array=($package_names)
+           matrix_packages=$(echo "${package_array[@]}" | jq -R 'split(",")')
+           echo "::set-output name=matrix-packages::${matrix_packages}"
+        
       - name: Delete Package
         run : |
-            echo "matrix : ${{ matrix.package }}"
+            for package in ${{fromJson(steps.create-matrix.outputs.matrix-packages)}}; do
+            echo "Deleting package: $package"
 
 
 
