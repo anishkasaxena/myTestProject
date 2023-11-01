@@ -33,13 +33,12 @@ jobs:
     #      # package: ${{ fromJson(needs.fetch-packages.outputs.result) }}
  
     steps:
-      - name: Debug
-        run: |
-         echo "result:${{ matrix.package }}"
-      # - name: Delete Package
-      #   run: |
-      #     echo "packages: ${{ fromJson(needs.fetch-packages.outputs.result) }}"
-
+      - name: Delete Package
+        uses: actions/delete-package-versions@v4
+        with: 
+          owner: '5ire-tech'
+          package-name: ${{ matrix.package }}
+         
 
 
 
