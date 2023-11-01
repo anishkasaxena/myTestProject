@@ -25,6 +25,10 @@ jobs:
         - name: Save to file
           run: |
               echo "$MY_RESULT" >> $GITHUB_WORKSPACE/my_result.txt
+        - name: List Workspace Contents
+          run: |
+                ls -la $GITHUB_WORKSPACE
+
 
                              
 
