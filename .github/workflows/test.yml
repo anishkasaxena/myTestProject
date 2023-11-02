@@ -31,7 +31,7 @@ jobs:
         uses: actions/delete-package-versions@v4
         with: 
           owner: '5ire-tech'
-          package-name: ${{ toJson(matrix.version) }}
+          package-name: "${{ toJson(matrix.version) }}"
 
 
 
