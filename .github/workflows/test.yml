@@ -29,8 +29,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-           # package: ["${{ needs.fetch-packages.outputs.result }}"]
-           package: [validator-backend,nominator-backend,esg-backend,explorer-api]
+            package: ["${{ needs.fetch-packages.outputs.result }}"]
+           # package: [validator-backend,nominator-backend,esg-backend,explorer-api]
     #      # package: ${{ fromJson(needs.fetch-packages.outputs.result) }}
  
     steps:
