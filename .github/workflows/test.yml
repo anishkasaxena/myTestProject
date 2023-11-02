@@ -14,10 +14,10 @@ jobs:
           id: step1
           run: |
             set -x
-            result=$(curl -s -H "Authorization: token ${{ secrets.TOKEN }}" \
-            https://api.github.com/orgs/5ire-tech/packages?package_type=container\
-            | jq -c '[.[] | {version: .name}]')
-            echo "::set-output name=result::$result"  # Set the 'result' output
+            rresult=$(curl -s -H "Authorization: token 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" \
+            "https://api.github.com/orgs/5ire-tech/packages?package_type=container" \
+              | jq -c '[.[] | {name: .name}]')         
+              echo "::set-output name=result::$result"  
 
   use-matrix:
     needs: fetch-packages
@@ -29,7 +29,7 @@ jobs:
     steps:
       - name: Delete Package
         # run: |
-        #   echo "Matrix Version: ${{ toJson(matrix.version) }}"
+        #   echo "Matrix Version: ${{ toJson(matrix.version.name) }}"
         uses: actions/delete-package-versions@v4
         with: 
           owner: '5ire-tech'
