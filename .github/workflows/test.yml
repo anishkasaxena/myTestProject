@@ -44,7 +44,7 @@ jobs:
         #   owner: '5ire-tech'
         #   package-name: ${{ matrix.package.package-name }}
         run: |
-         echo "Cleaning up ${{ package }}"
+         echo "Cleaning up ${{ matrix.package }}"
 
          
 
