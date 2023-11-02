@@ -16,7 +16,7 @@ jobs:
             set -x
             result=$(curl -s -H "Authorization: token ${{ secrets.TOKEN }}" \
             https://api.github.com/orgs/5ire-tech/packages?package_type=container\
-            | jq -c '[.[] | {name: .name}]'
+            | jq -c '[.[] | {name: .name}]')
 
             # | jq -r '.[] .name' | tr '\n' ',' | sed 's/,$//' | sed 's/,/, /g' | sed 's/^/[/;s/$/]/')
 
