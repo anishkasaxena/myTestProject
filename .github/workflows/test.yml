@@ -14,10 +14,11 @@ jobs:
           id: step1
           run: |
             set -x
-            result=$(curl -s -H "Authorization: token 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" \
-            "https://api.github.com/orgs/5ire-tech/packages?package_type=container" \
-              | jq -c '[.[] | {name: .name}]') 
+            result=$(curl -s -H "Authorization: token ${{ secrets.TOKEN }}" \
+            https://api.github.com/orgs/5ire-tech/packages?package_type=container\
+            | jq -c '[.[] | {name: .name}]')
             echo "::set-output name=result::$result"  # Set the 'result' output
+
   use-matrix:
     needs: fetch-packages
     runs-on: ubuntu-latest
