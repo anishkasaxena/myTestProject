@@ -35,8 +35,7 @@ jobs:
             # package: [validator-backend, nominator-backend, esg-backend, explorer-api, explorer-write, esg-frontend, nominator-frontend, validator-frontend, explorer-frontend, esg-admin-frontend, explorer-evm-socket, explorer-evm-write, explorer-native-socket, explorer-evm-api, explorer-native-api, explorer-native-write]
            # package: [validator-backend,nominator-backend,esg-backend,explorer-api]
              package: ${{ fromJson(needs.fetch-packages.outputs.result) }}
-             run: |
-                 echo "packages - $package"
+           
  
     steps:
       - name: Delete Package
