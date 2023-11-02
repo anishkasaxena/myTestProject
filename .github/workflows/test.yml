@@ -27,7 +27,7 @@ jobs:
     steps:
       - name: Delete Package
         run: |
-         echo "Cleaning up ${{ matrix.version }}"
+          echo "Matrix Version: ${{ toJson(matrix.version) }}"
 
 
 
