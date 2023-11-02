@@ -26,8 +26,12 @@ jobs:
           version: ${{ fromJson(needs.fetch-packages.outputs.result) }}
     steps:
       - name: Delete Package
-        run: |
-          echo "Matrix Version: ${{ toJson(matrix.version) }}"
+        # run: |
+        #   echo "Matrix Version: ${{ toJson(matrix.version) }}"
+        uses: actions/delete-package-versions@v4
+        with: 
+          owner: '5ire-tech'
+          package-name: ${{ toJson(matrix.version) }}
 
 
 
