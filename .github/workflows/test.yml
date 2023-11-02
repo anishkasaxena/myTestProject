@@ -30,11 +30,12 @@ jobs:
     needs: fetch-packages
     runs-on: ubuntu-latest
     strategy:
-      matrix:
+      matrix: ${{ fromJson(needs.fetch-packages.outputs.result) }}
+      
             # package: ["${{ needs.fetch-packages.outputs.result }}"]
             # package: [validator-backend, nominator-backend, esg-backend, explorer-api, explorer-write, esg-frontend, nominator-frontend, validator-frontend, explorer-frontend, esg-admin-frontend, explorer-evm-socket, explorer-evm-write, explorer-native-socket, explorer-evm-api, explorer-native-api, explorer-native-write]
            # package: [validator-backend,nominator-backend,esg-backend,explorer-api]
-             package: ${{ fromJson(needs.fetch-packages.outputs.result) }}
+             
            
  
     steps:
@@ -44,7 +45,7 @@ jobs:
         #   owner: '5ire-tech'
         #   package-name: ${{ matrix.package.package-name }}
         run: |
-         echo "Cleaning up ${{ matrix.package }}"
+         echo "Cleaning up ${{ matrix.run }}"
 
          
 
