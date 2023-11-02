@@ -6,9 +6,9 @@ on:
 jobs:
   fetch-packages:
     runs-on: ubuntu-latest
-
     outputs:
       result: ${{ steps.step1.outputs.result }}
+    
     steps:        
         - name: Debug
           id: step1
@@ -17,38 +17,17 @@ jobs:
             result=$(curl -s -H "Authorization: token ${{ secrets.TOKEN }}" \
             https://api.github.com/orgs/5ire-tech/packages?package_type=container\
             | jq -c '[.[] | {name: .name}]')
-
-            # | jq -r '.[] .name' | tr '\n' ',' | sed 's/,$//' | sed 's/,/, /g' | sed 's/^/[/;s/$/]/')
-
-            # | jq -r '[.[] .name] | join(", ")' | sed 's/,/, /g' | sed 's/^/[/;s/$/]/')
-            # # echo "$result<<EOF" >> $GITHUB_OUTPUT
-            # echo "$result<<EOF" >> $GITHUB_WORKSPACE/my_result.txt  # Save the result to a file
-
-            # echo 'EOF' >> $GITHUB_WORKSPACE/my_result.txt
             echo "::set-output name=result::$result"  # Set the 'result' output
   use-matrix:
     needs: fetch-packages
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{ fromJson(needs.fetch-packages.outputs.result) }}
-      
-            # package: ["${{ needs.fetch-packages.outputs.result }}"]
-            # package: [validator-backend, nominator-backend, esg-backend, explorer-api, explorer-write, esg-frontend, nominator-frontend, validator-frontend, explorer-frontend, esg-admin-frontend, explorer-evm-socket, explorer-evm-write, explorer-native-socket, explorer-evm-api, explorer-native-api, explorer-native-write]
-           # package: [validator-backend,nominator-backend,esg-backend,explorer-api]
-             
-           
- 
+      matrix:
+          version: ${{ fromJson(needs.fetch-packages.outputs.result) }}
     steps:
       - name: Delete Package
-        # uses: actions/delete-package-versions@v4
-        # with: 
-        #   owner: '5ire-tech'
-        #   package-name: ${{ matrix.package.package-name }}
         run: |
-         echo "Cleaning up ${{ matrix.run }}"
-
-         
-
+         echo "Cleaning up ${{ matrix.version }}"
 
 
 
