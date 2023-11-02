@@ -41,9 +41,9 @@ jobs:
         # uses: actions/delete-package-versions@v4
         # with: 
         #   owner: '5ire-tech'
-        #   package-name: ${{ matrix.package }}
+        #   package-name: ${{ matrix.package.package-name }}
         run: |
-         echo "Cleaning up ${{ matrix.package }}"
+         echo "Cleaning up ${{ matrix.package.package-namee }}"
 
          
 
