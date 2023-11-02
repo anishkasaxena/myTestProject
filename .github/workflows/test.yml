@@ -38,10 +38,13 @@ jobs:
  
     steps:
       - name: Delete Package
-        uses: actions/delete-package-versions@v4
-        with: 
-          owner: '5ire-tech'
-          package-name: ${{ matrix.package }}
+        # uses: actions/delete-package-versions@v4
+        # with: 
+        #   owner: '5ire-tech'
+        #   package-name: ${{ matrix.package }}
+        run: |
+         echo "Cleaning up ${{ matrix.package }}"
+
          
 
 
