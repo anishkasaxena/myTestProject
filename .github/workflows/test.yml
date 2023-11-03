@@ -30,10 +30,13 @@ jobs:
       - name: Delete Package
         # run: |
         #   echo "Matrix Version: ${{ toJson(matrix.version.name) }}"
-        uses: actions/delete-package-versions@v4
-        with: 
-          owner: '5ire-tech'
-          package-name: "${{ matrix.version.name }}"
+        # uses: actions/delete-package-versions@v4
+        # with: 
+        #   owner: '5ire-tech'
+        #   package-name: "${{ matrix.version.name }}"
+            
+        run: |
+                echo "Package Name: ${{ matrix.version.name }}"
 
 
 
